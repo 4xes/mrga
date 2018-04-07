@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import ProcessForm from './ProcessForm.js'
-import './App.css';
-import logo from './logo.svg';
+import '../App.css';
+import logo from '../logo.svg';
 import Preview from './Preview.js'
+import { Provider, connect } from 'react-redux'
+
 import {
   Container,
   Grid,
   Segment,
 } from 'semantic-ui-react'
+
+
+const processAction = { type: 'process' };
+
+function counter(state = { processId: '', result: {}}, action) {
+  const count = state.processId;
+  switch (action.type) {
+    case processAction.type:
+      return { processId: '', result: {}}
+    default:
+      return state
+  }
+}
 
 class App extends Component {
   render() {
@@ -21,9 +36,9 @@ class App extends Component {
         </Segment>
         <Segment style={{ padding: '4em 0em' }} vertical>
           <Grid container stackable verticalAlign='middle'>
-            {/*<Container>*/}
-              {/*<Preview id="68110dae4ac6cc5d692855132a6013fe" description="asdsad"/>*/}
-            {/*</Container>*/}
+            <Container>
+              <Preview id="68110dae4ac6cc5d692855132a6013fe" description="asdsad"/>
+            </Container>
           </Grid>
         </Segment>
       </view>

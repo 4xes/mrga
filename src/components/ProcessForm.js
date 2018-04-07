@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Icon, Container, Header} from 'semantic-ui-react'
-import Backend from './Backend.js'
+import Backend from '../api/Backend.js'
 
 export default class ProcessForm extends Component {
   constructor(props) {

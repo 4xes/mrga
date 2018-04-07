@@ -5,6 +5,7 @@ const BASE_URI = 'http://home.totruok.ru:44414';
 class Backend {
     url = '';
     id = '';
+    processId = '';
 
     constructor() {
     }
@@ -19,13 +20,14 @@ class Backend {
         }).then(response => {
             this.url = url;
 
-            callback(response)
+            console.log(response);
+            callback(response.data)
         })
     }
 
-    checkProcess(url, callback) {
-      axios.get(BASE_URI + '/get_video_by_id/' + url).then(response => {
-        this.url = url;
+    checkProcess(processId, callback) {
+      axios.get(BASE_URI + '/get_video_by_id/' + processId).then(response => {
+
         callback(response)
       })
     }
