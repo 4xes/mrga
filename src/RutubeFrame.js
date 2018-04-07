@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Iframe from 'react-iframe'
 
 export default class ProcessForm extends Component {
   constructor(props) {
@@ -8,14 +9,17 @@ export default class ProcessForm extends Component {
   }
 
   componentDidMount(){
-    this.ifr.onload = () => {
-      //this.play()
+    this.getIFrame().onload = () => {
+      this.play();
     }
+  }
 
+  getIFrame() {
+    return this.ifr.refs.iframe
   }
 
   sendMessage(message){
-    this.ifr.contentWindow.postMessage(JSON.stringify(message), "*");
+    this.getIFrame().contentWindow.postMessage(JSON.stringify(message), "*");
   }
 
   change(id) {
@@ -34,14 +38,17 @@ export default class ProcessForm extends Component {
     })
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
-
   render() {
-    const src = "//rutube.ru/play/embed/" + this.state.id;
+    const url = "//rutube.ru/play/embed/" + this.state.id;
     return (
-      <iframe width="720" height="405" src={src}  ref={(f) => this.ifr = f } frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen/>
+      <Iframe url={url}
+              width="720px"
+              ref={(f) => this.ifr = f}
+              id="frame"
+              height="450px"
+              display="initial"
+              position="relative"
+              allowFullScreen/>
     );
   }
 }

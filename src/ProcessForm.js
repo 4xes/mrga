@@ -27,7 +27,7 @@ export default class ProcessForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" placeholder="Введите ссылку на Rutube" value={this.state.value} onChange={this.handleChange} />
           </label>
           <br/>
           <input type="submit" value="Submit" />
