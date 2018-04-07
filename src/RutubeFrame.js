@@ -5,7 +5,7 @@ export default class ProcessForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {id: props.id};
+    this.state = {id: props.id, width: props.width, height: props.height};
   }
 
   componentDidMount(){
@@ -40,12 +40,15 @@ export default class ProcessForm extends Component {
 
   render() {
     const url = "//rutube.ru/play/embed/" + this.state.id;
+    const width = this.state.width || '720px';
+    const height = this.state.height || '450px';
+
     return (
       <Iframe url={url}
-              width="720px"
+              width={width}
+              height={height}
               ref={(f) => this.ifr = f}
               id="frame"
-              height="450px"
               display="initial"
               position="relative"
               allowFullScreen/>
