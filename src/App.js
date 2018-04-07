@@ -21,9 +21,9 @@ class App extends Component {
         </Segment>
         <Segment style={{ padding: '4em 0em' }} vertical>
           <Grid container stackable verticalAlign='middle'>
-            <Container>
-              <Preview id="68110dae4ac6cc5d692855132a6013fe" description="asdsad"/>
-            </Container>
+            {/*<Container>*/}
+              {/*<Preview id="68110dae4ac6cc5d692855132a6013fe" description="asdsad"/>*/}
+            {/*</Container>*/}
           </Grid>
         </Segment>
       </view>

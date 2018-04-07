@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Form, Icon, Container, Header} from 'semantic-ui-react'
-import axios from 'axios'
+import Backend from './Backend.js'
 
 export default class ProcessForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {value: ''};
+    this.state = {value: 'https://rutube.ru/video/68110dae4ac6cc5d692855132a6013fe/?pl_id=1721&pl_type=source'};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,12 +17,16 @@ export default class ProcessForm extends Component {
   }
 
   handleSubmit(event) {
-    this.setState({value: ''});
     event.preventDefault();
 
-    axios.get('http://home.totruok.ru:44414/get_video_by_id/68110dae4ac6cc5d692855132a6013fe').then(response => {
+    Backend.startProcess(this.state.value, (response) => {
       console.log(response)
-    })
+    },
+      () => {
+        alert("error")
+      }
+
+    )
   }
 
   render() {
@@ -41,10 +45,9 @@ export default class ProcessForm extends Component {
           />
           <Form.Field>
             <input placeholder='Url on rutube video' style={{
-              fontSize: '1.4em',
+              fontSize: '1.3em',
               fontWeight: 'normal',
               marginTop: '1.5em',
-              maxWidth: 600,
             }}  value={this.state.value} onChange={this.handleChange} />
           </Form.Field>
           <Button type='submit' color="red" size='huge'>
