@@ -21,7 +21,8 @@ class Backend {
             this.url = url;
 
             console.log(response);
-            callback(response.data)
+            callback("sadasdasd")
+            //callback(response.data)
         })
     }
 

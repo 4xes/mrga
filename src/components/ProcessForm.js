@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Form, Icon, Container, Header} from 'semantic-ui-react'
 import Backend from '../api/Backend.js'
+import { connect } from 'react-redux';
 
-export default class ProcessForm extends Component {
+class ProcessForm extends Component {
   constructor(props) {
     super(props);
 
@@ -19,8 +20,8 @@ export default class ProcessForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    Backend.startProcess(this.state.value, (response) => {
-      console.log(response)
+    Backend.startProcess(this.state.value, (processId) => {
+      console.log(processId);
     },
       () => {
         alert("error")
@@ -60,12 +61,4 @@ export default class ProcessForm extends Component {
   }
 }
 
-{/*<Container>*/}
-{/*<Form onSubmit={this.handleSubmit}>*/}
-{/*<FormGroup row>*/}
-{/*<Label for="url">Url</Label>*/}
-{/*<Input type="text" id="url" placeholder="Input the url" value={this.state.value} onChange={this.handleChange} />*/}
-{/*</FormGroup>*/}
-{/*<Button color="danger">Submit</Button>*/}
-{/*</Form>*/}
-{/*</Container>*/}
+export default connect()(ProcessForm);

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import './index.css';
 import App from './components/App';
-import rootReducer from './reducers/reducers.js'
+import rootReducer from './reducers/formReducer'
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'semantic-ui-css/semantic.min.css';

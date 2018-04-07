@@ -1,6 +1,3 @@
-import { combineReducers } from 'redux'
-
-
 import {
   SELECT_USER,
   START_PROCESS,
@@ -33,8 +30,4 @@ function reduceActions(state = {}, action) {
   }
 }
 
-const rootReducer = combineReducers({
-  reduceActions
-});
-
-export default rootReducer
+export default reduceActions;
