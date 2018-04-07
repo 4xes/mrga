@@ -10,7 +10,7 @@ export default class ProcessForm extends Component {
 
   componentDidMount(){
     this.getIFrame().onload = () => {
-      this.play();
+      //this.play();
     }
   }
 
