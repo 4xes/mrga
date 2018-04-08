@@ -4,13 +4,15 @@ import Iframe from 'react-iframe'
 export default class ProcessForm extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {id: props.id, width: props.width, height: props.height};
+    console.log(props);
+    this.state = {id: props.id, width: props.width, height: props.height, autoStart: props.autoStart, startFrom: props.startFrom || 0};
   }
 
   componentDidMount(){
     this.getIFrame().onload = () => {
       //this.play();
+      // if ()
+      // this.time(this.state.startFrom)
     }
   }
 
@@ -31,6 +33,15 @@ export default class ProcessForm extends Component {
     })
   }
 
+  time(time) {
+    this.sendMessage({
+      type: 'player:setCurrentTime',
+      data: {
+        time: time
+      }
+    })
+  }
+
   play (){
     this.sendMessage({
       type: 'player:play',
@@ -39,9 +50,19 @@ export default class ProcessForm extends Component {
   }
 
   render() {
-    const url = "//rutube.ru/play/embed/" + this.state.id;
-    const width = this.state.width || '720px';
-    const height = this.state.height || '450px';
+    const {id, width, height, autoStart, startFrom} = this.state
+    let params = [];
+    console.log('startFrom: ' + startFrom);
+    if (startFrom && startFrom !== 0) {
+      params.push('bmstart=' + startFrom)
+    }
+    if (autoStart) {
+      params.push('autoStart=' + autoStart)
+    }
+    let query = params.length > 0? '?'+ params.join('&') : '';
+
+    const url = "//rutube.ru/play/embed/" + id + query;
+    console.log(url);
 
     return (
       <Iframe url={url}

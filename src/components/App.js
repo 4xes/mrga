@@ -6,7 +6,7 @@ import Preview from './Preview.js'
 import RutubeFrame from './RutubeFrame.js'
 import { connect } from 'react-redux'
 import {BASE_URI} from '../api/Backend.js'
-import { Header, Item, Rating} from 'semantic-ui-react'
+import { Modal, Header, Button, Icon, Item, Rating} from 'semantic-ui-react'
 
 import {
   Container,
@@ -14,6 +14,7 @@ import {
   Segment,
 } from 'semantic-ui-react'
 import reduceActions from "../reducers/formReducer";
+import PlayerPortal from "./PlayerPortal.js";
 
 class App extends Component {
   constructor(props){
@@ -30,17 +31,17 @@ class App extends Component {
   }
 
   render() {
-    const hasData = this.state.values.id ;
+    const {id,features, recommendations, scenes} = this.state.values;
 
-    const data = hasData ? (
+    const data = id ? (
       <Segment vertical>
         <Grid style={{ padding: '4em 0em 0em 2em' }} container stackable verticalAlign='middle'>
           <Container>
 
             <Preview
-              id={this.state.values.id}
-              title={this.state.values['features'].title}
-              text={this.state.values['features'].text}
+              id={id}
+              title={features.title}
+              text={features.text}
             />
           </Container>
         </Grid>
@@ -48,7 +49,7 @@ class App extends Component {
         <Container style={{ padding: '4em 0em' }}>
           <Header as='h1'>Рекомендации</Header>
           <Grid centered columns={4}>
-            {this.state.values['recommendations'].map(recommendation => {
+            {recommendations.map(recommendation => {
               return (
                 <Grid.Column textAlign='center'>
                   <RutubeFrame id={recommendation.id} width="260" height="180"/>
@@ -56,19 +57,21 @@ class App extends Component {
                 </Grid.Column>
               )})
             }
+
           </Grid>
           <Header as='h1'>Сцены</Header>
           <Item.Group divided>
-            {this.state.values['scenes'].map(scene => {
+            {scenes.map(scene => {
               let features = scene['features'];
               let src = BASE_URI + '/' + scene['path_to_preview'];
               let description = 'Описание: ' + features['description'];
               let genre = 'Жанр: ' + features['genre'];
               let beauty = features['beauty'] * 2;
               let hype= features['haypost'] * 2;
+              let startFrom = scene['bmstart'];
               return (
                 <Item>
-                  <Item.Image size='medium' src={src} />
+                  <Item.Image size='big' src={src}/>
                   <Item.Content>
                     <Item.Meta>{description}</Item.Meta>
                     <Item.Meta>{genre}</Item.Meta>
@@ -79,6 +82,8 @@ class App extends Component {
                     <Item.Extra>Хайповость</Item.Extra>
                     <Item.Description>
                       <Rating disabled icon='star' defaultRating={hype} maxRating={10}/>
+                      <br />
+                      <PlayerPortal id={id} startFrom={startFrom}/>
                     </Item.Description>
                   </Item.Content>
                 </Item>
@@ -106,4 +111,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default App;
