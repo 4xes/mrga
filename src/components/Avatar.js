@@ -9,7 +9,6 @@ export default class Avatar extends Component {
     this.state = {userId: props.userId, avatar: props.avatar, isSelected: props.isSelected};
 
     this.handleClick = this.handleClick.bind(this);
-    //this.handleChange = this.handleChange.bind(this);
   }
 
 
@@ -20,10 +19,14 @@ export default class Avatar extends Component {
   render() {
     return (
       <Container>
-      <Transition visible={this.props.isSelected} animation='scale' duration={500}  >
-        <Icon link color="green" name="check circle"/>
-      </Transition>
-      <Image src={this.state.avatar} size='small' circular onClick={this.handleClick} />
+        <div style={{width: '1em', height: '1em'}}>
+          <Transition visible={this.props.isSelected} animation='scale' duration={500}  >
+          <Icon link size='large' color="green" name="check circle"/>
+        </Transition>
+        </div>
+        <div style={{left: 0, right: 0}}>
+            <Image src={this.state.avatar} size='small' circular onClick={this.handleClick} />
+        </div>
       </Container>
     )
   }
