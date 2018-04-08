@@ -8,7 +8,7 @@ class ProcessForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {value: 'https://rutube.ru/video/68110dae4ac6cc5d692855132a6013fe/?pl_id=1721&pl_type=source', isLoading: false};
+    this.state = {value: 'https://rutube.ru/video/25b6c4d11395048b3d16a7e3e7681add', isLoading: false};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

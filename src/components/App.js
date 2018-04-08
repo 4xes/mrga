@@ -50,7 +50,7 @@ class App extends Component {
           <Grid centered columns={4}>
             {this.state.values['recommendations'].map(recommendation => {
               return (
-                <Grid.Column>
+                <Grid.Column textAlign='center'>
                   <RutubeFrame id={recommendation.id} width="260" height="180"/>
                   <Header as='h3'>{recommendation['explanation']}</Header>
                 </Grid.Column>
@@ -62,7 +62,7 @@ class App extends Component {
             {this.state.values['scenes'].map(scene => {
               let features = scene['features'];
               let src = BASE_URI + '/' + scene['path_to_preview'];
-              let description = 'Описанпие: ' + features['description'];
+              let description = 'Описание: ' + features['description'];
               let genre = 'Жанр: ' + features['genre'];
               let beauty = features['beauty'] * 2;
               let hype= features['haypost'] * 2;
