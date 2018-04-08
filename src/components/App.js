@@ -47,6 +47,21 @@ class App extends Component {
       averageHype = sumHype / scenes.length
     }
 
+
+
+    const rendRecommendations = recommendations ? (<Grid centered columns={4}>
+      {recommendations.map(recommendation => {
+        return (
+          <Grid.Column textAlign='center'>
+            <RutubeFrame id={recommendation.id} width="260" height="180"/>
+            <Header as='h3'>{recommendation.text}</Header>
+          </Grid.Column>
+        )})
+      }
+    </Grid>):
+      <Header as="h3">Данное видео не было в обучающей выборке, поэтому у нас не достаточно данных для постронения рекомендаций</Header>;
+
+
     const data = id ? (
       <Segment vertical>
         <Grid style={{ padding: '4em 0em 0em 2em' }} container stackable verticalAlign='middle'>
@@ -60,23 +75,6 @@ class App extends Component {
               hype={averageHype}
             />
 
-            {/*<Table>*/}
-              {/*<Table.Header>*/}
-                {/*<Table.Row>*/}
-                  {/*<Table.HeaderCell width={4}>Время</Table.HeaderCell>*/}
-                  {/*<Table.HeaderCell width={12}>Транскрипция</Table.HeaderCell>*/}
-                {/*</Table.Row>*/}
-              {/*</Table.Header>*/}
-
-              {/*<Table.Body>*/}
-                {/*<Table.Row>*/}
-                  {/*<Table.Cell>Jamie</Table.Cell>*/}
-                  {/*<Table.Cell>Approved</Table.Cell>*/}
-                {/*</Table.Row>*/}
-              {/*</Table.Body>*/}
-
-            {/*</Table>*/}
-
           </Container>
         </Grid>
         <Container style={{ padding: '4em 0em' }} verticalAlign='middle'>
@@ -85,17 +83,7 @@ class App extends Component {
         </Container>
         <Container style={{ padding: '4em 0em' }}>
           <Header as='h1'>Рекомендации</Header>
-          <Grid centered columns={4}>
-            {recommendations.map(recommendation => {
-              return (
-                <Grid.Column textAlign='center'>
-                  <RutubeFrame id={recommendation.id} width="260" height="180"/>
-                  <Header as='h3'>{recommendation['explanation']}</Header>
-                </Grid.Column>
-              )})
-            }
-
-          </Grid>
+          {rendRecommendations}
           <Header as='h1'>Сцены</Header>
           <Item.Group divided>
             {scenes.map(scene => {

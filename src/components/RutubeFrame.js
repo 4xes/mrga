@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import Iframe from 'react-iframe'
 
-export default class ProcessForm extends Component {
+export default class RutubeFrame extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    this.state = {id: props.id, width: props.width, height: props.height, autoStart: props.autoStart, startFrom: props.startFrom || 0};
+    this.state = {id: props.id, width: props.width, height: props.height, autoChange: props.autoChange || false, autoStart: props.autoStart, startFrom: props.startFrom || 0};
   }
 
   componentDidMount(){
     this.getIFrame().onload = () => {
-      //this.play();
-      // if ()
-      // this.time(this.state.startFrom)
+      // if (this.state.autoChange) {
+      //   this.change(this.state.id)
+      // }
+      console.log('onLoad')
     }
   }
 

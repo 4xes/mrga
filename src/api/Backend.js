@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const BASE_URI = 'http://home.totruok.ru:44415';
+export const BASE_URI = 'http://home.totruok.ru:44416';
 const STATUS_PROCESSING = 'busy';
 
 class Backend {
@@ -40,11 +40,9 @@ class Backend {
         if (response.data === STATUS_PROCESSING) {
           onProcessing();
 
-          if (this.processId !== processId) {
-            this.processId = processId;
-            this.stopCheckProcess();
-            this.repeats = 0;
-          }
+          this.processId = processId;
+          this.stopCheckProcess();
+          this.repeats = 0;
           if (this.processId && !this.intervalId) {
             console.log('startInterval');
             this.intervalId = setInterval(() => {

@@ -14,7 +14,7 @@ export default class Preview extends Component {
       <Grid>
       <Grid.Row>
         <Grid.Column width={6}>
-          <RutubeFrame id={this.state.id} width="400" height="300"/>
+          <RutubeFrame id={this.props.id} width="400" height="300"/>
         </Grid.Column>
         <Grid.Column width={10}>
           {this.state.description}

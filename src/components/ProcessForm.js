@@ -31,7 +31,7 @@ class ProcessForm extends Component {
 
     this.state = {
       userId: users[0].id,
-      value: 'https://rutube.ru/video/25b6c4d11395048b3d16a7e3e7681add',
+      value: '',
       isLoading: false
     };
 

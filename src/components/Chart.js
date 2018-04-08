@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip} from 'recharts';
+import { LineChart, Line, CartesianGrid, YAxis, Legend, Tooltip} from 'recharts';
 
-export default class Chart2 extends Component {
+export default class Chart extends Component {
   constructor(props) {
     super(props);
 
