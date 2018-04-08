@@ -14,9 +14,7 @@ function reduceActions(state = {}, action) {
         userId: state.userId,
       };
     case SELECT_USER:
-      return {
-        userId: action.userId,
-      };
+      return Object.assign({}, state, {userId: action.userId});
     case START_PROCESS:
       return {
         userId: state.userId,

@@ -7,7 +7,7 @@ import RutubeFrame from './RutubeFrame.js'
 import { connect } from 'react-redux'
 import Chart from './Chart.js'
 import {BASE_URI} from '../api/Backend.js'
-import { Modal, Header, Button, Icon, Item, Rating} from 'semantic-ui-react'
+import { Modal, Card, Header, Button, Icon, Item, Rating} from 'semantic-ui-react'
 
 import {
   Container,
@@ -121,7 +121,7 @@ class App extends Component {
         <Segment inverted textAlign='center' style={{ minHeight: 400, padding: '4em 0em' }} vertical>
           <Header as="h1">Oilstone</Header>
           <Container>
-            <ProcessForm handler = {this.handler}/>
+            <ProcessForm handler={this.handler}/>
           </Container>
         </Segment>
         {data}
