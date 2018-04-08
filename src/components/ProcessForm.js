@@ -43,7 +43,9 @@ class ProcessForm extends Component {
 
   handler(action) {
     const {isLoading, value} = this.state;
-    this.setState({value: value, isLoading: isLoading, userId: action.userId})
+    if (!isLoading) {
+      this.setState({value: value, isLoading: isLoading, userId: action.userId})
+    }
   }
 
   handleChange(event) {
@@ -93,7 +95,7 @@ class ProcessForm extends Component {
           {users.map(user => {
             return (
               <Grid.Column textAlign='center'>
-                <Avatar handler={this.handler} userId={user.id} avatar={user.avatar} isSelected={userId === user.id}/>
+                <Avatar handler={this.handler} userId={user.id} avatar={user.avatar} isSelected={userId === user.id} isEnabled={!isLoading}/>
               </Grid.Column>
             )
           })
