@@ -5,6 +5,7 @@ import logo from '../logo.svg';
 import Preview from './Preview.js'
 import RutubeFrame from './RutubeFrame.js'
 import { connect } from 'react-redux'
+import Chart from './Chart.js'
 import {BASE_URI} from '../api/Backend.js'
 import { Modal, Header, Button, Icon, Item, Rating} from 'semantic-ui-react'
 
@@ -43,9 +44,13 @@ class App extends Component {
               title={features.title}
               text={features.text}
             />
+
           </Container>
         </Grid>
-
+        <Container style={{ padding: '4em 0em' }}>
+          <Header as='h1'>Аналитика</Header>
+          <Chart data={features['video_atraction_on_timeline']}/>
+        </Container>
         <Container style={{ padding: '4em 0em' }}>
           <Header as='h1'>Рекомендации</Header>
           <Grid centered columns={4}>
@@ -68,7 +73,7 @@ class App extends Component {
               let genre = 'Жанр: ' + features['genre'];
               let beauty = features['beauty'] * 2;
               let hype= features['haypost'] * 2;
-              let startFrom = scene['bmstart'];
+              let startFrom = scene['bmstart'] / 1000;
               return (
                 <Item>
                   <Item.Image size='big' src={src}/>
@@ -99,13 +104,13 @@ class App extends Component {
     return (
       <div>
         <Segment inverted textAlign='center' style={{ minHeight: 400, padding: '1em 0em' }} vertical>
-          <img src={logo} className="App-logo" alt="logo" />
+          <Header as="h1">Oilstone</Header>
           <Container>
             <ProcessForm handler = {this.handler}/>
           </Container>
         </Segment>
         {data}
-        <p>{JSON.stringify(this.state.values)}</p>
+        {/*<p>{JSON.stringify(this.state.values)}</p>*/}
       </div>
     );
   }

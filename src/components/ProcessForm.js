@@ -22,10 +22,9 @@ class ProcessForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (!this.state.isLoading) {
-      console.log('submit');
+      this.setLoading(true)
       Backend.startProcess(this.state.value, (processId) => {
           Backend.checkProcess(processId,()=> {
-            this.setLoading(true)
             //this.props.handler(inProgress())
           }, (data) =>{
             this.setLoading(false);
