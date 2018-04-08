@@ -33,6 +33,19 @@ class App extends Component {
 
   render() {
     const {id,features, recommendations, scenes} = this.state.values;
+    let sumBeauty = 0;
+    let sumHype = 0;
+    let averageBeauty = 0;
+    let averageHype = 0;
+    if (scenes && scenes.length > 0) {
+      scenes.map(scene => {
+        let features = scene['features'];
+        sumBeauty += features['beauty'] * 2.0;
+        sumHype += features['haypost'] * 2.0
+      });
+      averageBeauty = sumBeauty / scenes.length;
+      averageHype = sumHype / scenes.length
+    }
 
     const data = id ? (
       <Segment vertical>
@@ -43,6 +56,8 @@ class App extends Component {
               id={id}
               title={features.title}
               text={features.text}
+              beauty={averageBeauty}
+              hype={averageHype}
             />
 
           </Container>
@@ -103,7 +118,7 @@ class App extends Component {
 
     return (
       <div>
-        <Segment inverted textAlign='center' style={{ minHeight: 400, padding: '1em 0em' }} vertical>
+        <Segment inverted textAlign='center' style={{ minHeight: 400, padding: '4em 0em' }} vertical>
           <Header as="h1">Oilstone</Header>
           <Container>
             <ProcessForm handler = {this.handler}/>
