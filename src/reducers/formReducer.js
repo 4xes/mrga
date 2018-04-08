@@ -2,29 +2,32 @@ import {
   SELECT_USER,
   START_PROCESS,
   IN_PROGRESS,
-  SHOW_RESULT
+  SHOW_RESULT,
+  ERROR_PROCESS
 } from '../actions/Actions.js'
 
 
 function reduceActions(state = {}, action) {
   switch (action.type) {
+    case ERROR_PROCESS:
+      return {
+        userId: state.userId,
+      };
     case SELECT_USER:
       return {
         userId: action.userId,
       };
     case START_PROCESS:
-      return Object.assign({}, state, {
-        progressId: action.url,
-      });
+      return {
+        userId: state.userId,
+      };
     case IN_PROGRESS:
-      return Object.assign({}, state, {
+      return {
+        userId: state.userId,
         progressId: action.processId,
-      });
-
+      };
     case SHOW_RESULT:
-      return Object.assign({}, state, {
-        data: action.data,
-      });
+      return Object.assign({}, state, action.data);
     default:
       return state
   }
