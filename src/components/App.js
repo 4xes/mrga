@@ -47,7 +47,7 @@ class App extends Component {
 
           </Container>
         </Grid>
-        <Container style={{ padding: '4em 0em' }}>
+        <Container style={{ padding: '4em 0em' }} verticalAlign='middle'>
           <Header as='h1'>Аналитика</Header>
           <Chart data={features['video_atraction_on_timeline']}/>
         </Container>

@@ -23,7 +23,7 @@ export default class PlayerPortal extends Component {
         onClose={this.handleClose}
         openOnTriggerClick
         trigger={(
-          <Button>
+          <Button style={{marginTop:10}}>
             Play
             <Icon name='right play' />
           </Button>
