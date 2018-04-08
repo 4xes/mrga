@@ -24,7 +24,7 @@ function reduceActions(state = {}, action) {
     case IN_PROGRESS:
       return {
         userId: state.userId,
-        progressId: action.processId,
+        isBusy: true
       };
     case SHOW_RESULT:
       return Object.assign({}, state, action.data);

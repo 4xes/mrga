@@ -1,10 +1,11 @@
 import axios from 'axios'
 
 export const BASE_URI = 'http://home.totruok.ru:44414';
+const STATUS_PROCESSING = 'busy';
 
 class Backend {
-    url = '';
-    processId = '';
+
+    repeats = 0;
 
     constructor() {
     }
@@ -15,16 +16,43 @@ class Backend {
         "use_cache": "False"
 
       }).then(response => {
-        this.processId = response.data;
-        callback(this.processId)
+        console.log('startProcess');
+        console.log(response);
+        callback(response.data)
       }).catch(() => {
         error()
       })
     }
 
-    checkProcess(processId, callback) {
+    stopCheckProcess() {
+      if (this.intervalId) {
+        console.log('stopInterval: ' + this.intervalId);
+        clearInterval(this.intervalId);
+      }
+    }
+
+    checkProcess(processId, onProcessing, onResult) {
       axios.get(BASE_URI + '/get_video_by_id/' + processId).then(response => {
-        callback(response.data)
+        console.log('checkProcess');
+        console.log(response.data);
+        if (response.data === STATUS_PROCESSING) {
+          onProcessing();
+
+          if (this.processId !== processId) {
+            this.processId = processId;
+            this.stopCheckProcess();
+            this.repeats = 0;
+          }
+          if (this.processId && !this.intervalId) {
+            console.log('startInterval');
+            this.intervalId = setInterval(() => {
+              console.log("repeats:" + this.repeats++);
+              this.checkProcess(processId, onProcessing, onResult)
+            }, 1000);
+          }
+        } else {
+          onResult(response.data)
+        }
       })
     }
 

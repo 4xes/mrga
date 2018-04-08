@@ -14,7 +14,6 @@ import {
   Segment,
 } from 'semantic-ui-react'
 import reduceActions from "../reducers/formReducer";
-import Backend from "../api/Backend";
 
 class App extends Component {
   constructor(props){

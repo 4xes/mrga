@@ -20,8 +20,8 @@ export function startProcess(id) {
   return { type: START_PROCESS, id}
 }
 
-export function inProgress(processId) {
-  return { type: IN_PROGRESS, processId }
+export function inProgress() {
+  return { type: IN_PROGRESS }
 }
 
 export function showResult(data) {
