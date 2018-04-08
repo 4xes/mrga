@@ -30,7 +30,9 @@ export default class PlayerPortal extends Component {
         )}
       >
         <Segment style={ {position: 'fixed', top: '25%', left: '25%', zIndex: 1000 }}>
-          <RutubeFrame id={id} width="720" height="480" autoStart startFrom={this.state.startFrom} />
+          <div id={id + Math.random()} key={id + Math.random()}>
+            <RutubeFrame key={id + Math.random()} id={id} width="720" height="480" autoStart startFrom={this.state.startFrom} />
+          </div>
         </Segment>
       </TransitionablePortal>
     )

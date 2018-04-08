@@ -14,7 +14,9 @@ export default class Preview extends Component {
       <Grid>
       <Grid.Row>
         <Grid.Column width={6}>
-          <RutubeFrame id={this.props.id} width="400" height="300"/>
+          <div id={id + Math.random()} key={id + Math.random()}>
+            <RutubeFrame key={id + Math.random()} id={this.props.id} width="400" height="300"/>
+          </div>
         </Grid.Column>
         <Grid.Column width={10}>
           {this.state.description}

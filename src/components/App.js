@@ -53,7 +53,7 @@ class App extends Component {
         return (
           <Grid.Column textAlign='center'>
             <div id={recommendation.id}>
-                <RutubeFrame id={recommendation.id} width="260" height="180"/>
+                <RutubeFrame key={id} id={recommendation.id} width="260" height="180"/>
             </div>
             <Header as='h3'>{recommendation.text}</Header>
           </Grid.Column>
@@ -69,13 +69,13 @@ class App extends Component {
           <Container>
             <div id={id}>
             <Preview
-              key={id}
+              key={id + Math.random()}
               id={id}
               title={features.title}
               text={features.text}
               beauty={averageBeauty}
               hype={averageHype}
-            /></div>>
+            /></div>
 
 
           </Container>
