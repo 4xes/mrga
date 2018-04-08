@@ -42,7 +42,7 @@ export default class Preview extends Component {
       <Grid>
       <Grid.Row>
         <Grid.Column width={6}>
-          <RutubeFrame id={id} width="400" height="300"/>
+          <RutubeFrame key={id} id={id} width="400" height="300"/>
         </Grid.Column>
         <Grid.Column width={10}>
           <Header as='h2'>{title}</Header>

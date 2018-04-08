@@ -31,7 +31,7 @@ class ProcessForm extends Component {
 
     this.state = {
       userId: users[0].id,
-      value: '',
+      value: 'https://rutube.ru/video/2e0993d0d71e107f7aa6de7603b72c93',
       isLoading: false
     };
 
@@ -45,7 +45,7 @@ class ProcessForm extends Component {
     const {isLoading, userId, value} = this.state;
     const isDifferentUser = action.userId !== userId;
     if (!isLoading) {
-      this.setState({value: value, isLoading: isLoading, userId: action.userId})
+      this.setState({value: value, isLoading: isLoading, userId: action.userId});
       if (Backend.data && isDifferentUser) {
         this.load()
       }
@@ -65,6 +65,7 @@ class ProcessForm extends Component {
   load() {
     if (!this.state.isLoading) {
       this.setLoading(true);
+      console.log('check:' + this.state.userId);
       Backend.startProcess(this.state.userId, this.state.value, (processId) => {
           Backend.checkProcess(this.state.userId, processId,
             () => {
@@ -145,6 +146,50 @@ class ProcessForm extends Component {
             Make
             <Icon name='right arrow'/>
           </Button>
+
+          {/*{isLoading ? (*/}
+              {/*<Header*/}
+                {/*as='h4'*/}
+                {/*content='Время обработки видео занимает 2-3 минуты, если вы хотите посмотреть результаты обработки сейчас, то:\n'*/}
+                {/*inverted*/}
+                {/*style={{*/}
+                  {/*fontSize: '1.1em',*/}
+                  {/*fontWeight: 'normal',*/}
+                  {/*marginTop: '1.5em',*/}
+                {/*}}*/}
+              {/*/>):*/}
+            {/*('')}*/}
+
+          <Header
+            as='h5'
+            content='Время обработки видео занимает 2-3 минуты, если вы хотите посмотреть результаты обработки сейчас, то:'
+            inverted
+            style={{
+              fontSize: '0.9em',
+              fontWeight: 'normal',
+              marginTop: '1.5em',
+            }}
+          />
+          <Header
+            as='h6'
+            content='https://rutube.ru/video/789e9546c537f68ea7519314075384e4'
+            inverted
+            style={{
+              fontSize: '0.8em',
+              fontWeight: 'normal',
+              marginTop: '0.5em',
+            }}
+          />
+          <Header
+            as='h6'
+            content='https://rutube.ru/video/eeaa865351b47eefe41b5cb4b6fe78d5'
+            inverted
+            style={{
+              fontSize: '0.8em',
+              fontWeight: 'normal',
+              marginTop: '0.5em',
+            }}
+          />
         </Form>
       </Container>
     );

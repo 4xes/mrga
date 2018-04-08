@@ -28,7 +28,8 @@ class App extends Component {
   handler(action) {
     let values = reduceActions(this.state.values, action);
     console.log(values);
-    this.setState({values: values})
+    this.setState({values: values});
+    this.forceUpdate()
   }
 
   render() {
@@ -41,19 +42,19 @@ class App extends Component {
       scenes.map(scene => {
         let features = scene['features'];
         sumBeauty += (features['nima_scores'][0] - 4) * 3.0 / 6.0 * 10.0;
-        sumHype += features['haypost'] * 2.0
+        sumHype += features['haypost'] * 2.0 * 0.7
       });
       averageBeauty = sumBeauty / scenes.length;
       averageHype = sumHype / scenes.length
     }
 
-
-
     const rendRecommendations = recommendations ? (<Grid centered columns={4}>
       {recommendations.map(recommendation => {
         return (
           <Grid.Column textAlign='center'>
-            <RutubeFrame id={recommendation.id} width="260" height="180"/>
+            <div id={recommendation.id}>
+                <RutubeFrame id={recommendation.id} width="260" height="180"/>
+            </div>
             <Header as='h3'>{recommendation.text}</Header>
           </Grid.Column>
         )})
@@ -66,14 +67,16 @@ class App extends Component {
       <Segment vertical>
         <Grid style={{ padding: '4em 0em 0em 2em' }} container stackable verticalAlign='middle'>
           <Container>
-
+            <div id={id}>
             <Preview
+              key={id}
               id={id}
               title={features.title}
               text={features.text}
               beauty={averageBeauty}
               hype={averageHype}
-            />
+            /></div>>
+
 
           </Container>
         </Grid>
@@ -92,7 +95,7 @@ class App extends Component {
               let description = 'Описание: ' + features['description'];
               let genre = 'Жанр: ' + features['genre'];
               let beauty = (features['nima_scores'][0] - 4) * 3.0 / 6.0 * 10.0;
-              let hype= features['haypost'] * 2;
+              let hype= features['haypost'] * 2 * 0.7;
               let startFrom = scene['bmstart'] / 1000;
               let text = features['text'];
               return (
