@@ -7,7 +7,7 @@ import RutubeFrame from './RutubeFrame.js'
 import { connect } from 'react-redux'
 import Chart from './Chart.js'
 import {BASE_URI} from '../api/Backend.js'
-import { Modal, Card, Header, Button, Icon, Item, Rating} from 'semantic-ui-react'
+import { Modal, Table, Card, Header, Button, Icon, Item, Rating} from 'semantic-ui-react'
 
 import {
   Container,
@@ -40,7 +40,7 @@ class App extends Component {
     if (scenes && scenes.length > 0) {
       scenes.map(scene => {
         let features = scene['features'];
-        sumBeauty += features['beauty'] * 2.0;
+        sumBeauty += (features['nima_scores'][0] - 4) * 3.0 / 6.0 * 10.0;
         sumHype += features['haypost'] * 2.0
       });
       averageBeauty = sumBeauty / scenes.length;
@@ -59,6 +59,23 @@ class App extends Component {
               beauty={averageBeauty}
               hype={averageHype}
             />
+
+            {/*<Table>*/}
+              {/*<Table.Header>*/}
+                {/*<Table.Row>*/}
+                  {/*<Table.HeaderCell width={4}>Время</Table.HeaderCell>*/}
+                  {/*<Table.HeaderCell width={12}>Транскрипция</Table.HeaderCell>*/}
+                {/*</Table.Row>*/}
+              {/*</Table.Header>*/}
+
+              {/*<Table.Body>*/}
+                {/*<Table.Row>*/}
+                  {/*<Table.Cell>Jamie</Table.Cell>*/}
+                  {/*<Table.Cell>Approved</Table.Cell>*/}
+                {/*</Table.Row>*/}
+              {/*</Table.Body>*/}
+
+            {/*</Table>*/}
 
           </Container>
         </Grid>
@@ -86,9 +103,10 @@ class App extends Component {
               let src = BASE_URI + '/' + scene['path_to_preview'];
               let description = 'Описание: ' + features['description'];
               let genre = 'Жанр: ' + features['genre'];
-              let beauty = features['beauty'] * 2;
+              let beauty = (features['nima_scores'][0] - 4) * 3.0 / 6.0 * 10.0;
               let hype= features['haypost'] * 2;
               let startFrom = scene['bmstart'] / 1000;
+              let text = features['text'];
               return (
                 <Item>
                   <Item.Image size='big' src={src}/>
@@ -105,6 +123,7 @@ class App extends Component {
                       <br />
                       <PlayerPortal id={id} startFrom={startFrom}/>
                     </Item.Description>
+                    <Item.Extra>{text}</Item.Extra>
                   </Item.Content>
                 </Item>
               )})

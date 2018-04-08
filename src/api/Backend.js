@@ -1,16 +1,17 @@
 import axios from 'axios'
 
-export const BASE_URI = 'http://home.totruok.ru:44414';
+export const BASE_URI = 'http://home.totruok.ru:44415';
 const STATUS_PROCESSING = 'busy';
 
 class Backend {
 
     repeats = 0;
+    data = {};
 
     constructor() {
     }
 
-    startProcess(url, callback, error) {
+    startProcess(userId, url, callback, error) {
       axios.post(BASE_URI + '/process_video/', {
         "path": url,
         "use_cache": "False"
@@ -19,7 +20,8 @@ class Backend {
         console.log('startProcess');
         console.log(response);
         callback(response.data)
-      }).catch(() => {
+      },(e) => {
+        console.log(e);
         error()
       })
     }
@@ -31,8 +33,8 @@ class Backend {
       }
     }
 
-    checkProcess(processId, onProcessing, onResult) {
-      axios.get(BASE_URI + '/get_video_by_id/' + processId).then(response => {
+    checkProcess(userId, processId, onProcessing, onResult, onError) {
+      axios.get(BASE_URI + '/get_video_by_id/' + processId+ '?userId=' + userId).then(response => {
         console.log('checkProcess');
         console.log(response.data);
         if (response.data === STATUS_PROCESSING) {
@@ -51,8 +53,12 @@ class Backend {
             }, 1000);
           }
         } else {
+          this.data = response.data;
           onResult(response.data)
         }
+      }, (error) => {
+        console.log(error);
+        onError()
       })
     }
 

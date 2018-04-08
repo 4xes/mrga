@@ -42,26 +42,38 @@ class ProcessForm extends Component {
   }
 
   handler(action) {
-    const {isLoading, value} = this.state;
+    const {isLoading, userId, value} = this.state;
+    const isDifferentUser = action.userId !== userId;
     if (!isLoading) {
       this.setState({value: value, isLoading: isLoading, userId: action.userId})
+      if (Backend.data && isDifferentUser) {
+        this.load()
+      }
     }
   }
 
   handleChange(event) {
     this.setState({value: event.target.value, isLoading: this.state.isLoading});
+
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    this.load()
+  }
+
+  load() {
     if (!this.state.isLoading) {
       this.setLoading(true);
-      Backend.startProcess(this.state.value, (processId) => {
-          Backend.checkProcess(processId, () => {
-            //this.props.handler(inProgress())
+      Backend.startProcess(this.state.userId, this.state.value, (processId) => {
+          Backend.checkProcess(this.state.userId, processId,
+            () => {
           }, (data) => {
             this.setLoading(false);
             this.props.handler(showResult(data))
+          },() => {
+            this.setLoading(false);
+            this.props.handler(errorProcess())
           })
         },
         () => {
@@ -72,7 +84,6 @@ class ProcessForm extends Component {
       this.setLoading(false);
       Backend.stopCheckProcess()
     }
-
   }
 
   handleClick() {
